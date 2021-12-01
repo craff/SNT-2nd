@@ -256,6 +256,20 @@ print(2,True,f,end="")
 print(3,True,f,sep=",",end="")
 print(4,True,f,sep=",")
 
+## La confusion entre ``print`` et ``return`` est encouragé par l'utilisation du
+## notebook qui fait un affichage du résultat de la dernière ligne. Dans un notebook,
+## le programme qui suit affiche $42$, si on le lance avec un vrai interprète python,
+## il n'affiche rien du tout. Cela peut faire croire que ``return`` provoque un affichage
+## et que c'est la même chose que ``print``
+
+def f(x): return x+1
+f(2)
+
+## En fait, le notebook transforme automatiquement le programme précédent en:
+
+def f(x): return x+1
+print f(2)
+
 ## Les booléens
 ## ------------
 
@@ -316,7 +330,6 @@ if x < 5 or y > 2:
 ## Les nombres flottants
 ## ---------------------
 
-
 ## Les séquences
 ## -------------
 
@@ -326,5 +339,35 @@ if x < 5 or y > 2:
 ## La boucle ``for``
 ## --------------
 
+## La boucle ``for`` va répéter un bloc pour tous les éléments d'une séquence en changeant les valeurs
+## d'une variable de boucle. Par exemple, la boucle suivante affiche tous les entiers de $0$ à $10$
+
+for i in [0,1,2,3,4,5,6,7,8,9,10]:
+    print(i)
+
+## Pour simplifier beaucoup de boucle, ``range(n)`` produit la séquence des entiers de $0$ à $n-1$ (attention,
+## j'ai bien écrit $n-1$) et ``range(a,b)`` produit la séquence des entiers de $a$ à $b-1$. En fait, ``range`` ne
+## produit pas exactement une séquence, mais ce qui produit ``range`` convient parfaitement pour les boucles
+## ``for``. Ainsi on peut simplifier la boucle précédente en:
+
+for i in range(1,11):
+    print(i)
+
+## Rapel, les blocs d'une ligne peuvent se mettre sur la même ligne que les «``:``»:
+
+for i in range(1,11): print(i)
+
 ## La boucle ``while``
 ## ----------------
+
+## La boucle ``while`` prend une condition et execure le bloc qui suit tant que la condition reste vraie.
+## par exemple la boucle suivante affiche aussi les entiers entre $0$ et $10$:
+
+i = 0
+while i < 11:
+      print(i)
+      i = i + 1
+
+## Notez que l'on doit déclarer la variable de boucle (ici ``i``) avant le ``while`` et
+## changer la variable ``i`` dans la boucle. Sinon le programme ne s'arrêtera jamais, car la condition
+## restera toujours vrai.
