@@ -1,0 +1,330 @@
+## Cours de programmation pour la SNT en 2nd
+## =========================================
+
+## Note: ce document est un notebook jupyter qui inclut du code
+## en python. Si vous arrivez dessus depuis le moodle du lycée,
+## vous êtes sur le site [basthon.fr](https://basthon.fr). Ce document est interactif,
+## Il faut modifier et jouer avec les exemples.
+##
+## En haut à gauche deux icônes,
+## * une disquette (vous savez ce que c'est ?), pour sauvegarder votre fichier
+##   sur votre ordinateur
+## * un dossier pour recharger un fichier précédemment sauvegardé.
+
+## Qu'est ce qu'un programme ?
+## ---------------------------
+
+def suivant_syracuse(n):
+    if n % 2 == 0:
+        return(n//2)
+    else:
+        return(3*n+1)
+
+## Cet exemple est une fonction, c'est un programme qui calcule un entier...
+## Il sert surtout à cacher la réponse à la question pour qu'on discute...
+
+## **Un programme** est une suite d'instructions à exécuter sur un ordinateur
+## pour faire des calculs et interagir avec le monde extérieur (entrée/sortie)
+## Voici quelques interactions possibles:
+## * sauvegarder des données dans un fichier
+## * sauvegarder des données dans une base de données
+## * afficher des choses sur l'écran
+## * communiquer avec des serveurs
+## * communiquer avec d'autres programmes
+## * ...
+
+## Avec les éléments du programme scolaire de SNT, on verra surtout la partie
+## calcul ... Mais un programme qui n'interagit pas avec l'extérieur ne sert à
+## rien!
+
+## Différence entre **algorithme** et **programme** ... Il n'y en a pas!!!  par
+## contre, il y a des langages de programmation (en général pas très bien
+## définis) qui s'adressent aux humains pour donner une procédure de calcul et des
+## langages de programmation réels qui s'adressent aux ordinateurs et qui doivent
+## être très bien définis.
+
+## En seconde, on fait du **python**. Il y a des milliers de langages de
+## programmation, dont des langages généraux comme python, C, C++, Java, OCaml,
+## Rust, Haskell, Prolog, ...  et des langages spécialisées comme SQL, HTML,
+## CSS, ... ça peut faire peur, mais une fois que l'on a appris un concept dans
+## un langage de programmation, il n'y a que la syntaxe qui change quand on
+## change de langage et ce n'est en général pas très compliqué.
+
+## Les entiers
+## -----------
+
+## Python manipule des entiers de taille arbitraire. C'est un des rares langages
+## qui utilise par défaut ce type d'entiers. Les autres langages utilisent en
+## général des entiers 64 bits ou 32 bits. Les entiers de python sont plus lent
+## mais correspondent aux vrais entiers des mathématiques. Pour écrire un entier
+## en python, on peut l'écrire en base 10 (décimal), 2 (binaire), 8 (octal) ou
+## 16 (héxadécimal). Par contre, par défaut, python affiche les entiers en
+## décimal.
+
+(0b101010, 0o52, 42, 0x2A)
+
+## Attention, il n'est pas nécessaire de savoir faire la conversion, c'est python
+## qui la fait pour vous. Par contre, parfois un entier s'écrit naturellement
+## dans une base plutôt qu'une autre. C'est par exemple le cas des code couleur RGB
+## (rouge, vers, bleu) qui se réprente en Hexadécimal, avec deux chiffres par couleur.
+## ``0xFF0000`` désigne le bleu, ``0x00FF00`` désigne le vert, ``0000FF`` désigne le rouge.
+## En décimal, on y comprendrait rien.
+
+## Changez la première ligne ci-dessous pour explorer la conversion entre code et  couleurs
+
+color = 0xFF0000
+# Code qui crée une image avec un rectangle utilisant la couleur ci-dessus.
+from PIL import Image, ImageDraw
+img = Image.new("RGB", (100, 100))
+img1 = ImageDraw.Draw(img)
+img1.rectangle([(0, 0), (100, 100)], fill = color)
+img
+
+## Attention, ce sont les mêmes entiers, pas de conversion nécessaire, c'est
+## juste des écritures différentes. On peut utiliser ``_`` pour rendre les
+## entiers plus lisibles:
+
+(1_000_000_000, 1000000000)
+
+## Voici les opérations que python connaît sur les entiers:
+## * Addition
+2+3
+## * Soustraction
+2-3
+## * opposé
+-3
+## * Multiplication
+2*3
+## * Division euclidienne (quotient et reste)
+(7//3, 7%3)
+## * valeur absolue
+abs(-42)
+## * puissance
+2**100
+
+## Il y a d'autres fonctions, par exemple pour manipuler les entiers bit à bit...
+## Mais on va s'arrêter là.
+
+## On peut construire des expressions mathématiques compliquées, avec les
+## priorités habituelles (dans le doute, mettez plus de parenthèses):
+
+((2 + 3 * 5) * 42) % (3 ** 7)
+
+## Les fonctions
+## -------------
+
+## En math, une fonction est une boite noire qui prend une valeur et renvoie une
+## valeur. Exemples:
+##
+## * $f: \mathbb R \to \mathbb R, f(x) = x^2 - x + 1$ prend un nombre réel $x$
+## en argument et retourne $x^2+1$ comme résultat.
+##
+## * Une transformation du plan (translation, rotation, ...) est une fonction
+## qui prend un point du plan en argument et retourne un autre point du plan
+## (ou parfois le même)
+## * Une suite est une fonction qui prend en argument un entier et renvoie un
+## nombre réel.
+
+## En informatique, une fonction est une suite d'instructions que l'on peut
+## réutiliser autant de fois que l'on veut, en changeant la valeur d'une ou
+## plusieurs variable (les paramètres).  Cette suite d'instructions peut renvoyer
+## une valeur ou pas.
+
+## Différence avec les maths
+## * En math, au lycée, les fonctions ont en général un seul argument (ce n'est plus vrai après).
+
+## * En informatique, les fonctions viennent avec le mode de calcul. En math, ce
+## n'est pas toujours vrai, et il y a même des fonctions non calculables (on
+## démontre qu'il n'y a pas de programme pour les calculer).
+
+## * En informatique les fonctions peuvent avoir des interactions avec le monde
+## extérieur (on parle d'effets de bord). Dans ce cas, le résultat d'une
+## fonction ne dépend pas uniquement des arguments de la fonction.
+
+## Voici la définition d'une fonction qui calcule $x^10$ sans utiliser la fonction puissance de python.
+
+def puissance10(x):
+    return x*x*x*x*x*x*x*x*x*x
+
+## et une utilisation de cette fonction (on parle d'appel de la function):
+
+puissance10(10)
+
+## Analysons la syntaxe:
+## * ``def`` est un mot clef de python qui indique que ce qui suit est une
+## définition de fonction.
+## * puissance10 est le nom de la fonction.
+## * x (qui doit être entre parenthèse) est le paramètre de la fonction. On ne
+## connaît pas sa valeur au moment où l'on définit la fonction, sa valeur sera
+## connue et changera à chaque utilisation (appel) de la fonction.
+## * après les ``:`` viennent les instructions pour le calcul de la fonction.
+## Elles utilisent en général ``x``.
+## * le mot clef ``return`` indique que le calcul de la fonction est terminé et
+## donne la valeur qu'il faut renvoyer. Après ``return``, la fonction est terminée,
+## les lignes après ``return`` ne sera jamais exécutée.
+## * dans l'appel de la function, on donne simplement le nom de la fonction et
+## la valeur de son argument.
+
+## La définition de la fonction ne fait rien! Python se rappelle juste de la
+## définition quelque-part dans sa mémoire.  Par contre, à chaque fois que l'on
+## appel la fonctions, ses instructions sont exécutées avec la valeur fournie
+## pour le paramètre. Ainsi,
+
+puissance10(1) + puissance10(3) == 1*1*1*1*1*1*1*1*1*1 + 3*3*3*3*3*3*3*3*3*3
+
+## Comme indiqué plus haut, une fonction peut avoir plusieurs arguments comme
+
+def moyenne1(a,b):
+    return (a+b)/2
+
+moyenne(4,6)
+
+## Remarque: en python, il n'y a pas d'analyse du code (sauf la vérification de
+## la syntaxe) et une définition de fonction ne fait rien, comme dit plus
+## haut. Une fonction peut donc appeler une autre fonction définie après. Ce
+## n'est qu'au moment d'un appel de fonction qu'une fonction non définie
+## provoquera une erreur. Une fonction peux même s'appeler elle même, on parle
+## alors de fonction récursive.
+
+def fibonacci(n):
+    if n <= 0: return 1
+    else: return fibonacci(n-1) + fibonacci(n-2)
+
+print(fibonacci(0))
+print(fibonacci(1))
+print(fibonacci(2))
+print(fibonacci(3))
+print(fibonacci(4))
+
+## Sans ``if`` (que l'on explique plus bas), une fonction qui s'appelle elle
+## même ne s'arrête jamais.
+
+## Remarque: les fonctions récursives sont au programme de terminale en NSI
+## ... Mais ce n'est pas plus compliqué que les boucles et surtout, il me semble
+## très important d'apprendre en même les boucles et les fonctions récursives.
+
+## Les blocs indentés
+## ------------------
+
+## Python utilise la décalage du code vers la droite pour délimiter la fin de la
+## fonction. Toutes les lignes qui commence plus à droite que le ``def`` sont
+## dans la fonction.
+
+## On peut utiliser le décalage que l'on veut, mais on doit utiliser le même
+## décalage pour toutes les lignes. Attention, on peut utiliser des espaces ou des tabulations
+## pour décaler les lignes et ça peut poser des problèmes si on mélange.
+
+## Les blocs sont aussi utilisés pour les boucles et les conditionnels. Il y aura donc des blocs dans les
+## bloc. Les blocs sont toujours introduit par une ligne qui termine avec ``:``. Les blocs d'une seule ligne
+## peuvent être mis sur la même ligne juste après les ``:``.
+
+## Voici un exemple avec des blocs imbriqués:
+
+def f(x):
+    #début du 1er bloc
+    if x = 0:
+        # début du 2nd bloc
+        return 3
+        # fin du 2nb bloc
+    else:
+        # début du 3e bloc
+        if x = 1:
+            # début du 4e bloc
+            return 42
+            # fin du 4e bloc
+        else: return 73 #un 5e bloc sur une ligne
+        # fin du 3e bloc
+    #fin du 1er bloc
+
+## Print
+## -----
+
+## Attention, ``print`` provoque juste un affichage. Il ne faut pas le confondre
+## avec ``return`` qui arrête le calcul d'une fonction et renvoie la valeur
+## indiqué comme résultat de la fonction.
+
+## ``print`` doit surtout être utilisé pour rechercher les erreurs dans votre
+## code, et parfois comme interface utilisateur (quand on échange du texte avec
+## l'utilisateur).
+
+## En python, ``print`` peut afficher des valeurs de n'importe quel type,
+## plusieurs à la fois.  On peut controler le séparateur et le fait d'aller à la
+## ligne.
+def f(x): return x
+print(1,True,f)
+print(2,True,f,end="")
+print(3,True,f,sep=",",end="")
+print(4,True,f,sep=",")
+
+## Les booléens
+## ------------
+
+## Les booléens sont très importants, car il servent dans les instructions
+## conditionnelles pour choisir ce que l'on va faire. Il y a deux booléens pour
+## désigner le vrai et le faux:
+True
+##
+False
+
+## Python possède des fonctions de comparaison qui prennent deux entiers, deux
+## flottants, deux séquences, ... et renvoie un booléen:
+## * égal
+(2 == 4, 2 == 2, True == False, True == True)
+## * différent
+(2 != 4, 2 != 2, True != False, True != True)
+## * inférieur
+(2 < 4, 2 < 2, True < False, True < True)
+## * inférieur ou égal
+(2 <= 4, 2 <= 2, True <= False, True <= True)
+## * supérieur
+(2 > 4, 2 > 2, True > False, True > True)
+## * supérieur ou égal
+(2 >= 4, 2 >= 2, True >= False, True >= True)
+
+## Python possève aussi des functions sur les booléens:
+## * négation
+(not True, not False)
+## * conjonction (le et)
+(True and True, True and False, False and True, False and False)
+## * disjonction (le ou)
+(True or True, True or False, False or True, False or False)
+
+## L'instruction conditionnelle
+## --------------------------
+
+## Il est indispensable de pouvoir executer du code sous condition.
+## La conditionnelle ``if`` permet d'exécuter du code que si une condition
+## (exprimée par un booléen) est vrai.
+
+## La syntaxe est la suivante, changez ``b`` pour voir ce qui se passe:
+b = True
+if b:
+    print('cas vrai sans else')
+
+if b:
+    print('cas vrai avec else')
+else:
+    print('cas faux sans else')
+
+## la condition peut être une expression compliquée:
+(x,y) = (2,3)
+if x < 5 or y > 2:
+    print("coucou")
+
+## ATTENTION: on ne dit pas la «boucle if»!
+
+## Les nombres flottants
+## ---------------------
+
+
+## Les séquences
+## -------------
+
+## Les chaînes de caractère
+## ------------------------
+
+## La boucle ``for``
+## --------------
+
+## La boucle ``while``
+## ----------------
