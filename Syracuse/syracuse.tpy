@@ -87,6 +87,7 @@ def longueur_syracuse(n):
 ## arrête le programme immédiatement dans le cas contraire. On l'utilise pour
 ## vérifier qu'un programme fait ce que l'on attend de lui.
 ## La fonction doit vérifier (décommenter ces lignes quand le code est fini):
+
 #CORRIGE
 assert(longueur_syracuse(1)==0)
 assert(longueur_syracuse(2)==1)
@@ -207,10 +208,10 @@ new_compare_test("II.1","divisible",vector2)
 ## -------------
 
 ## Écrire une fonction ``est_premier`` qui renvoie True si son argument est premier.
-## remarque: pour aller plus vite, on peut remarquer si si $n$ n'est pas premier,
+## remarque: pour aller plus vite, on peut remarquer que si $n$ n'est pas premier,
 ## on peut toujours trouver un diviseur $a>1$ qui vérifie $a*a <= n$.
 
-## Indication, on peut utiliser une boucle ``for`` si on test tous les diviseurs
+## Indication, on peut utiliser une boucle ``for`` si on teste tous les diviseurs
 ## entre $2$ et $n-1$ ou une boucle ``while`` si on veut utiliser l'astuce ci-dessus.
 
 def est_premier(n):

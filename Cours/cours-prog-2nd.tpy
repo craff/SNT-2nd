@@ -141,7 +141,7 @@ abs(-42)
 ## extérieur (on parle d'effets de bord). Dans ce cas, le résultat d'une
 ## fonction ne dépend pas uniquement des arguments de la fonction.
 
-## Voici la définition d'une fonction qui calcule $x^10$ sans utiliser la fonction puissance de python.
+## Voici la définition d'une fonction qui calcule $x^{10}$ sans utiliser la fonction puissance de python.
 
 def puissance10(x):
     return x*x*x*x*x*x*x*x*x*x
@@ -318,7 +318,7 @@ if b:
 if b:
     print('cas vrai avec else')
 else:
-    print('cas faux sans else')
+    print('cas faux avec else')
 
 ## la condition peut être une expression compliquée:
 (x,y) = (2,3)
