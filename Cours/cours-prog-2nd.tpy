@@ -87,19 +87,17 @@ img
 (1_000_000_000, 1000000000)
 
 ## Voici les opérations que python connaît sur les entiers:
-## * Addition
-2+3
-## * Soustraction
-2-3
+## * Addition et soustraction
+(2+3, 2-3)
 ## * opposé
 -3
 ## * Multiplication
 2*3
 ## * Division euclidienne (quotient et reste)
 (7//3, 7%3)
-## * valeur absolue
+## * Valeur absolue
 abs(-42)
-## * puissance
+## * Puissance
 2**100
 
 ## Il y a d'autres fonctions, par exemple pour manipuler les entiers bit à bit...
@@ -235,6 +233,67 @@ def f(x):
         else: return 73 #un 5e bloc sur une ligne
         # fin du 3e bloc
     #fin du 1er bloc
+
+## Les variables
+## -------------
+
+Les variables sont extrêmement importantes en programmation. Elles permettent de
+donner un nom à une valeur pour l'utiliser plus tard. Elle sont aussi utilisées pour
+recevoir les arguments d'une fonction.
+
+def f(x):            #1
+    y = x * x        #2
+    y = y * y        #3
+    return x *y * y  #4
+print(f(2))          #5
+print(f(3))          #6
+
+## Lorsque l'on exécute ce code, on passe par les étapes suivantes:
+## * Python lit les ligne 1 à 4 et stocke la définition de la fonction `f`.
+## * La ligne 5 appelle la fonction `f` et on passe à la ligne 1 avec `x` qui a pour valeur 2.
+## * La ligne 2 définit `y` avec la valeur $2\times 2 = 4$.
+## * La ligne 3 change `y` avec la valeur $4\times 4 = 16$.
+## * La ligne 4 termine le calcul de `f(2)` qui renvoie $2\times 16 \times 16 = 512$.
+## * On revient à la ligne 5 pour évaluer `print(512)`qui s'affiche.
+## * La ligne 6 appelle la fonction `f` et on passe à la ligne 1 avec `x` qui a pour valeur 3.
+## * La ligne 2 définit `y` avec la valeur $3\times 3 = 9$.
+## * La ligne 3 change `y` avec la valeur $9\times 9 = 81$.
+## * La ligne 4 termine le calcul de `f(3)` qui renvoie $3\times 81 \times 81 = 19683.
+## * On revient à la ligne 6 pour évaluer `print(19683)`qui s'affiche.
+
+## Ce site permet d'exécuter du code python en visualisant l'évolution de la
+## valeur des variables:
+## (pythontutor.com)[https://pythontutor.com/visualize.html#mode=edit]. Copie le
+## code ci-dessus dans ce site et visualise l'exécution.
+
+## Remarque: en mathématique, les variables ne changent pas de valeur. La ligne
+## `y = y * y` est une équation en mathématique alors qu'elle change la valeur
+## de `y` en python. Il y a des langages de programmation, comme `OCaml`, qui
+## n'autorisent pas de changer la valeur d'une variable.
+
+## *Attention* les paramètres de la fonction et les variables définit dans cette
+## fonction ne sont visibles qu'à l'intérieur de la fonction. Python possède
+## aussi des variables _globales_ définies à l'extérieur des fonctions et qui sont
+## différentes des variables des fonctions.
+
+x = 2
+y = 3
+def f(x):
+  y = x*x
+  return y
+def g(x):
+  y = x+x
+  return y
+z=f(y)*g(y)+f(x)
+
+## Ce programme possède trois variable `x` et `y` différentes:
+## * des globales définies aux deux premières lignes,
+## * celles de `f` et
+## * celles de `g`.
+
+## À la fin de l'exécution de ce programme, les variables globales `x` et `y`
+## vallent toujours 2 et 3 et `z` vaut $(3 \times 3) \times (3 + 3) + (2 \times
+## 2) = 58$.
 
 ## Print
 ## -----
