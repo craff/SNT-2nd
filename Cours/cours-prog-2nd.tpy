@@ -263,7 +263,7 @@ print(f(3))          #6
 
 ## Ce site permet d'exécuter du code python en visualisant l'évolution de la
 ## valeur des variables:
-## (pythontutor.com)[https://pythontutor.com/visualize.html#mode=edit]. Copie le
+## [pythontutor.com](https://pythontutor.com/visualize.html#mode=edit). Copie le
 ## code ci-dessus dans ce site et visualise l'exécution.
 
 ## Remarque: en mathématique, les variables ne changent pas de valeur. La ligne
