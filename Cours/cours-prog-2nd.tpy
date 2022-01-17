@@ -237,9 +237,9 @@ def f(x):
 ## Les variables
 ## -------------
 
-Les variables sont extrêmement importantes en programmation. Elles permettent de
-donner un nom à une valeur pour l'utiliser plus tard. Elles sont aussi utilisées pour
-recevoir les arguments d'une fonction.
+## Les variables sont extrêmement importantes en programmation. Elles permettent
+## de donner un nom à une valeur pour l'utiliser plus tard. Elles sont aussi
+## utilisées pour recevoir les arguments d'une fonction.
 
 def f(x):            #1
     y = x * x        #2
@@ -420,7 +420,7 @@ if x < 5 or y > 2:
 from math import sin,cos,asin,acos,sqrt,pi
 sqrt(2),sin(pi),sin(pi/2),asin(sin(pi))
 
-## la ligne `from ... se place en général en début de fichier python. Il n'est pas
+## la ligne `from ...` se place en général en début de fichier python. Il n'est pas
 ## nécessaire de la répéter à chaque utilisation d'une fonction.
 
 ## On peut utiliser les comparaisons `==`, `>`, `>=`, etc. sur les flottants
