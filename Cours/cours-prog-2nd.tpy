@@ -238,7 +238,7 @@ def f(x):
 ## -------------
 
 Les variables sont extrêmement importantes en programmation. Elles permettent de
-donner un nom à une valeur pour l'utiliser plus tard. Elle sont aussi utilisées pour
+donner un nom à une valeur pour l'utiliser plus tard. Elles sont aussi utilisées pour
 recevoir les arguments d'une fonction.
 
 def f(x):            #1
@@ -254,7 +254,7 @@ print(f(3))          #6
 ## * La ligne 2 définit `y` avec la valeur $2\times 2 = 4$.
 ## * La ligne 3 change `y` avec la valeur $4\times 4 = 16$.
 ## * La ligne 4 termine le calcul de `f(2)` qui renvoie $2\times 16 \times 16 = 512$.
-## * On revient à la ligne 5 pour évaluer `print(512)`qui s'affiche.
+## * On revient à la ligne 5 pour évaluer `print(512)` qui s'affiche.
 ## * La ligne 6 appelle la fonction `f` et on passe à la ligne 1 avec `x` qui a pour valeur 3.
 ## * La ligne 2 définit `y` avec la valeur $3\times 3 = 9$.
 ## * La ligne 3 change `y` avec la valeur $9\times 9 = 81$.
@@ -271,10 +271,10 @@ print(f(3))          #6
 ## de `y` en python. Il y a des langages de programmation, comme `OCaml`, qui
 ## n'autorisent pas de changer la valeur d'une variable.
 
-## *Attention* les paramètres de la fonction et les variables définit dans cette
-## fonction ne sont visibles qu'à l'intérieur de la fonction. Python possède
+## *Attention* les paramètres de la fonction et les variables définis dans cette
+## fonction ne sont visibles qu'à l'intérieur de la fonction. On parle de _variables locales_. Python possède
 ## aussi des variables _globales_ définies à l'extérieur des fonctions et qui sont
-## différentes des variables des fonctions.
+## différentes des variables _locales_ des fonctions.
 
 x = 2
 y = 3
@@ -285,6 +285,7 @@ def g(x):
   y = x+x
   return y
 z=f(y)*g(y)+f(x)
+print(x,y,z)
 
 ## Ce programme possède trois variable `x` et `y` différentes:
 ## * des globales définies aux deux premières lignes,
@@ -389,11 +390,120 @@ if x < 5 or y > 2:
 ## Les nombres flottants
 ## ---------------------
 
+## Les nombres flottants correspondent aux nombres utilisés par vos
+## calculatrices scientifiques. On les écrit de la même manière, mais attention,
+## si il n'y a pas de `.`, ce sont des nombres entiers. Ceci n'est pas un
+## problème car python traduit automatiquement les entiers en nombres flottants
+## lorsque cela est nécessaire.
+12.0, 12.45 + 3, -1.42e10 + 12.7e-5
+
+## Les nombres flottants donnent une approximation des nombres réels,
+## mais il n'est pas possible de représenter tous les nombres réels à l'aide des
+## nombres flottants. On relève trois limitations:
+## * Les nombres très très grands ne sont pas représentables et deviennent infini:
+1e310
+## * Les nombres très très petit deviennent nuls:
+1e-350
+## * Les nombres contiennent un nombre limité de chiffre après la virgule:
+ (1e-15 + 1) - 1, (1e-16 + 1) - 1
+
+## Les fonctions habituelles `+`, `-`, `*` et `/` sont disponibles sur les nombres
+## flottant, ainsi que la valeur absolue: `abs(x)`. Attention à ne pas confondre
+## * la division euclidienne `//` qui n'a de sens que sur les nombres entiers et
+## produit toujours un nombre entier et
+## * la division `flottante` qui produit toujours un nomùbre flottant.
+3.4+abs(-4), 3/4, 3//4, 3.2*1e-4-5.42+(2*7.4/7.1)
+
+## Pour utiliser les fonctions comme $sin(x)$, $\sqrt{x}$, mais aussi le nombre
+## $\pi$, il faut les rendre visibles pour avoir le droit de s'en servir. Voici
+## comment on fait:
+from math import sin,cos,asin,acos,sqrt,pi
+sqrt(2),sin(pi),sin(pi/2),asin(sin(pi))
+
+## la ligne `from ... se place en général en début de fichier python. Il n'est pas
+## nécessaire de la répéter à chaque utilisation d'une fonction.
+
+## On peut utiliser les comparaisons `==`, `>`, `>=`, etc. sur les flottants
+## comme sur les entiers. Mais attention, quelque-chose qui vaut $0$ en math, ne
+## vaut en général par $0$ en python, à cause des _erreurs d'arrondis_ liées au
+## nombre limité de chiffres après la virgule. Voici un exemple:
+from math import sqrt
+x = sqrt(2)
+y = x*x - 2
+y == 0
+
+## En math, on a $y = (\sqrt{2})^2 - 2 = 0$ et la dernière ligne devrait
+## renvoyer faux. En python $y$ est très petit mais n'est pas nul.
+
 ## Les séquences
 ## -------------
 
-## Les chaînes de caractère
-## ------------------------
+## Les _séquences_ permettent de stocker dans une variable plusieurs valeurs et
+## pas juste une seule. Cela est nécessaire, par exemple pour stocker toutes les
+## notes d'un élève, les températures journalières pendant une certaine période,
+## etc.
+
+## Les séquences sont aussi appelées _listes_ ou _tableaux_. Attention: presque
+## tous les langages de programmation en dehors de python font une distinction
+## subtile entre listes et tableaux. En python, on ne fait pas la différence et on
+## va plutôt parler de séquence.
+
+## On définit une séquence ainsi:
+[], [1, 7, 42, -12, 52, 4]
+
+## `[]` représente la séquence vide et `[1, 7, 42, -12, 52, 4]` une séquence avec
+## 6 nombres entiers.
+
+## Comme pour les entiers ou les flottants, une séquence peu être la valeur
+## d'une variable:
+l = [15, 6, 12.0, 7, 14, 25]
+l
+## Voici les opérations de base que l'on va utiliser sur une séquence:
+## * accès à une des valeurs: `l[i]` (remarque `l[0]` est la première valeur de
+## la séquence):
+l[0], l[1], l[2]
+## * modification d'une des valeurs:
+l[3] = 73
+l
+## * ajout d'une valeur à la fin d'une séquence:
+l.append(42)
+l
+## * longueur de la séquence:
+len(l)
+
+## Pour vraiment tirer bénéfices des séquences, il faut utiliser des boucles
+## `for`. Des exemples sont disponibles à la fin de la section correspondante.
+
+## Les chaînes de caractères
+## -------------------------
+
+## _Les chaînes de caractères_ permettent de représenter du texte en python.
+## On peut les écrire de trois manières en python:
+str1 = "l'été sera chaud"
+str2 = 'le titre est "cours de python"'
+str3 = """une chaîne sur
+plusieurs
+lignes"""
+print(str1,str2,str3)
+
+## Ces trois manières existent pour permettent de gérer les apostrophes, les
+## guillemmets et les saut à la ligne dans les textes.
+
+## On peut manipuler les chaînes de caractère de la manière suivante:
+## * `str[i]` pour accéder au caractère à la position `i` (`str[0]` pour le premier
+## caractère)
+str3[3]
+## * `str[i:j]` pour accéder aux caractères entre la position `i` et la position `j-1`
+str3[3:7]
+## * `len(str)` pour connaître le longueur d'une séquence
+len(str3)
+## * `str1 + str2` pour fabriquer une nouvelle séquence ne mettant deux ou plusieurs séquences bout à bout:
+print(str1 + str2 + str3)
+
+## Attention: il n'est pas possible de modifier une séquence comme on modifie un
+## tableau. On parle de donnée _immutable_. `str3[3] = 'x'` est interdit et
+## produit une erreur.
+str[3] = 'x'
 
 ## La boucle ``for``
 ## --------------
@@ -412,9 +522,19 @@ for i in [0,1,2,3,4,5,6,7,8,9,10]:
 for i in range(1,11):
     print(i)
 
-## Rapel, les blocs d'une ligne peuvent se mettre sur la même ligne que les «``:``»:
+## Rappel, les blocs d'une ligne peuvent se mettre sur la même ligne que les «``:``»:
 
 for i in range(1,11): print(i)
+
+## Les boucles `for` sont très utiles en conjonction avec les tableaux. Voici un
+## exemple: le calcul des la moyenne des valeurs dans une séquence.
+def moyenne_sequence(l):
+    somme = 0
+    for i in range(0,len(l)):
+    	somme = somme + l[i]
+    return somme/len(l)
+print(moyenne_sequence([10,10,10]))
+print(moyenne_sequence([8,10,14,15,16]))
 
 ## La boucle ``while``
 ## ----------------
